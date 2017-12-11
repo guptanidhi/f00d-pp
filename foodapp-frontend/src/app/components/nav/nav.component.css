@@ -1,0 +1,11 @@
+nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
+  nav a.active {
+    color: #039be5;
+    background-color: #EEE;
+  }
+  /* .container-fluid{
+    background-color: #cb202d;
+  } */

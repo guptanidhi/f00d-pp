@@ -1,0 +1,25 @@
+<app-nav></app-nav>
+<div class="container-fluid">   
+  <div class="row">
+    <div *ngFor="let res of fetchedRestaurants" class="col-sm-6 col-md-3 col-lg-3">
+      <div class="thumbnail" style="height:470px">
+        <img src="{{res.featuredImage}}" [style.width]="100+'%'" [style.height]="200+'px'" class="img-responsive" alt="Loading...">
+        <div class="caption caption-block">
+          <h4>{{res.name}}  <!-- <a data-toggle="tooltip" title="view location" target="_blank" href="https://www.google.co.in/maps/search/{{res.restaurantLatitude}}+{{res.restaurantLongitude}}?sa=X&ved=0ahUKEwiHmrawtKfVAhWIfrwKHfO8DNUQ8gEIIDAA">
+              <span class="glyphicon glyphicon-map-marker"></span></a> -->
+          </h4>
+          <p> <span class="title">Cuisines:</span> {{res.cuisines}}</p>
+          <p> <span class="title">Cost for two:</span> {{res.averageCostForTwo}} </p>
+          <p> <span class="title">Comments:</span> {{res.comments}} </p>
+          <!-- <p> <span class="title">Ratings:</span> {{res.restaurant.user_rating.aggregate_rating}} </p> -->
+          <input id="str" #comment placeholder="Your comments..."/>
+          <button class="btn btn-primary" (click)="sendValues(res.id,comment.value,res)">Save</button>
+        </div>
+        
+        <button class="btn btn-block btn-danger" (click)="deleteRestaurant(res.id)" role="button">
+            <span class="glyphicon glyphicon-thumbs-down"></span> Remove 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

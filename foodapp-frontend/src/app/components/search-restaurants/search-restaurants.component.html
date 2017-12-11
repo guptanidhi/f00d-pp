@@ -1,0 +1,43 @@
+<app-nav></app-nav>
+<div>
+  <agm-map class="agmMap" [latitude]="mapOptions.lat" [longitude]="mapOptions.lng" [zoom]="mapOptions.zoom" [scrollwheel]="false" >
+    <agm-marker *ngFor="let m of markers;" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="'../assets/restaurantIcon.png'" (mouseOver)="onMouseOver(infoWindow)" (mouseOut)="onMouseOut(infoWindow)">
+      <agm-info-window #infoWindow>
+        <img src={{m.thumb}} height="70px" width="70px" class="float-left" style="margin-right: 5px;" />
+        <div class="pull-right" style="font-size: 15px;min-width: 150px;">
+          <h4 style="display: inline;">{{m.name}}</h4>
+          <div style="margin-top: 5px;">
+            <span class="glyphicon glyphicon-star" style="color:red;"></span>
+            <strong>{{m.rating}}</strong>
+            <span class="pull-right">
+              <span class="glyphicon glyphicon-thumbs-up " style="color:red;"></span>
+              <strong>{{m.votes}}</strong>
+            </span>
+          </div>
+        </div>
+      </agm-info-window> 
+    </agm-marker>
+  </agm-map>
+</div>
+<!-- <span class="pull-right fa fa-toggle-on" (click)="toggleMenu()" style="font-size: 22px;margin-top:5px;"></span> -->
+<span class="glyphicon glyphicon-chevron-{{toggleClass}}" (click)="toggleMenu()" style="background-color: #A3A3A3; padding: 5px; z-index: 10; font-size:25px;border-radius: 0 15px 15px 0"></span>
+<div id="criteria-subpanel" class="well col-md-4">
+  <!-- <span class="glyphicon glyphicon-chevron-{{toggleClass}}" (click)="toggleMenu()" style="background-color: black; color: white;padding: 2px;"></span> -->
+  <div class="row text-center" style="margin:10px 7px;">
+    <h3 style="display: inline;">Search Restaurants</h3>
+    <!-- <span class="pull-right fa fa-toggle-{{toggleClass}}" (click)="toggleMenu()" style="font-size: 24px;margin-top:5px;"></span> -->
+  </div>
+  <div class="col-md-5 marginBottom">
+    <input type="text" class="form-control" #city value="bangalore" placeholder="City" />
+  </div>
+  <div class="col-md-5 marginBottom">
+    <input type="text" class="form-control" #cuisine value="italian" placeholder="Cuisine" />
+  </div>
+  <div class="col-md-2 marginBottom">
+    <button class="btn btn-primary fa fa-search hamburger" disabled="{{disabled}}" (click)="fetchRestaurants(city.value, cuisine.value, 'search')">
+    </button>
+  </div>
+  <div class="form-group col-md-12" id="scrollableList">
+    <app-display-restaurants [restaurantsData]="restaurants"></app-display-restaurants>
+  </div>
+</div><!--end of criteria-subpanel-->
